@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Profit Audit — Food Factor</title>
+<meta name="description" content="A free, in-person profit audit for Vancouver restaurants. Three findings. Real dollar impact. Delivered in seven days by Tushar Pingle." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="The Profit Audit — Food Factor" />
+<meta property="og:description" content="There's $40,000 a year hiding in your POS data. I'll find it in 7 days. Free." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://foodfactor.ca/audit" />
+
+<!-- Fonts: Fraunces (display serif, characterful) + Inter Tight (clean body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-deep: #131F38;
+    --navy-soft: #2A3A5F;
+    --gold: #D4A843;
+    --gold-soft: #E8C66B;
+    --sage: #6B8F71;
+    --sage-soft: #8FAE94;
+    --terra: #C85C3B;
+    --cream: #F5F1E8;
+    --cream-warm: #EFE9D8;
+    --paper: #FAF8F1;
+    --ink: #0E1729;
+    --ink-soft: #4A5468;
+    --line: rgba(212, 168, 67, 0.22);
+    --line-soft: rgba(27, 42, 74, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Fraunces', Georgia, serif; font-feature-settings: "ss01", "ss02"; }
+
+  /* ─── LAYOUT ─────────────────────────────── */
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+
+  section { padding: 120px 0; position: relative; }
+  @media (max-width: 768px) { section { padding: 80px 0; } .container, .container-narrow { padding: 0 24px; } }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(27, 42, 74, 0.0);
+    backdrop-filter: blur(0px);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(19, 31, 56, 0.92);
+    backdrop-filter: blur(20px);
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+  .logo span { color: var(--gold); }
+  .nav-cta {
+    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none;
+    padding: 10px 20px; border: 1px solid var(--gold);
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* ─── HERO ─────────────────────────────── */
+  .hero {
+    background: var(--navy-deep);
+    color: var(--cream);
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 120px;
+  }
+
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(212, 168, 67, 0.08), transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(107, 143, 113, 0.06), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Decorative grain */
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 60px; } }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+  .eyebrow::before {
+    content: ""; width: 32px; height: 1px; background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 6vw, 84px);
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    margin-bottom: 36px;
+    color: var(--cream);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  .hero h1 .num {
+    font-feature-settings: "ss01";
+    font-weight: 500;
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(245, 241, 232, 0.78);
+    max-width: 520px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .cta-primary {
+    display: inline-flex; align-items: center; gap: 16px;
+    background: var(--gold);
+    color: var(--navy-deep);
+    padding: 22px 38px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+  .cta-primary::before {
+    content: ""; position: absolute; inset: 0;
+    background: var(--cream);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+  }
+  .cta-primary > * { position: relative; z-index: 1; }
+  .cta-primary:hover::before { transform: translateY(0); }
+  .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(212, 168, 67, 0.4); }
+  .cta-primary svg { transition: transform 0.3s; }
+  .cta-primary:hover svg { transform: translateX(6px); }
+
+  .hero-meta {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.7);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(212, 168, 67, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
+  }
+
+  /* Hero side panel — receipt-style proof card */
+  .proof-card {
+    background: var(--cream);
+    color: var(--navy-deep);
+    padding: 48px 40px;
+    position: relative;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+    transform: rotate(1.5deg);
+    transition: transform 0.6s ease;
+  }
+  .proof-card:hover { transform: rotate(0deg) translateY(-4px); }
+  .proof-card::before {
+    content: ""; position: absolute; top: -1px; left: -1px; right: -1px; height: 6px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 16px, transparent 16px 24px);
+  }
+  .proof-card .stamp {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    display: flex; justify-content: space-between;
+  }
+  .proof-card .big-num {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 500;
+    color: var(--navy-deep);
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+  }
+  .proof-card .big-num em {
+    color: var(--terra); font-style: italic; font-weight: 400;
+  }
+  .proof-card .big-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .proof-card .line-item {
+    display: flex; justify-content: space-between;
+    padding: 14px 0;
+    border-top: 1px dashed rgba(27, 42, 74, 0.2);
+    font-size: 14px;
+  }
+  .proof-card .line-item span:last-child { font-weight: 500; color: var(--terra); }
+  .proof-card .total {
+    margin-top: 12px; padding-top: 18px;
+    border-top: 2px solid var(--navy-deep);
+    display: flex; justify-content: space-between;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .proof-card .total span:last-child { color: var(--terra); }
+
+  /* ─── REVEAL ANIM ─────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.delay-1 { transition-delay: 0.15s; }
+  .reveal.delay-2 { transition-delay: 0.3s; }
+  .reveal.delay-3 { transition-delay: 0.45s; }
+  .reveal.delay-4 { transition-delay: 0.6s; }
+
+  /* ─── SECTION HEADERS ─────────────────────────────── */
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 4.5vw, 60px);
+    line-height: 1.02;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--navy-deep);
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); font-weight: 300; }
+  .section-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 620px;
+    font-weight: 300;
+  }
+
+  /* ─── PROBLEM SECTION ─────────────────────────────── */
+  .problem { background: var(--paper); }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 80px;
+    border-top: 1px solid var(--line-soft);
+  }
+  @media (max-width: 800px) { .problem-grid { grid-template-columns: 1fr; } }
+
+  .problem-card {
+    padding: 56px 40px 56px 0;
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    transition: background 0.4s ease;
+  }
+  .problem-card:nth-child(2) { padding-left: 40px; }
+  .problem-card:nth-child(3) { padding-left: 40px; border-right: none; }
+  @media (max-width: 800px) {
+    .problem-card { padding: 48px 0 !important; border-right: none; }
+  }
+
+  .problem-card:hover { background: var(--cream-warm); }
+
+  .problem-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .problem-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: var(--navy-deep);
+  }
+  .problem-card p {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── DELIVERABLE SECTION ─────────────────────────────── */
+  .deliverable {
+    background: var(--navy-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .deliverable::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, rgba(212, 168, 67, 0.08), transparent 60%);
+    pointer-events: none;
+  }
+  .deliverable .section-title { color: var(--cream); }
+  .deliverable .section-sub { color: rgba(245, 241, 232, 0.72); }
+
+  .deliv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 72px;
+    position: relative; z-index: 2;
+  }
+  @media (max-width: 900px) { .deliv-grid { grid-template-columns: 1fr; } }
+
+  .deliv-card {
+    background: rgba(245, 241, 232, 0.04);
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    padding: 44px 36px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+  .deliv-card:hover {
+    background: rgba(245, 241, 232, 0.08);
+    border-color: var(--gold);
+    transform: translateY(-6px);
+  }
+  .deliv-card .deliv-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 32px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 22px;
+  }
+  .deliv-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .deliv-card p {
+    color: rgba(245, 241, 232, 0.7);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .walkthrough-callout {
+    margin-top: 48px;
+    padding: 48px 56px;
+    background: var(--gold);
+    color: var(--navy-deep);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative; z-index: 2;
+  }
+  @media (max-width: 700px) {
+    .walkthrough-callout { grid-template-columns: 1fr; padding: 36px 32px; gap: 24px; }
+  }
+  .walkthrough-callout .plus {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    line-height: 1;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .walkthrough-callout h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .walkthrough-callout p {
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 580px;
+  }
+
+  /* ─── SAMPLE REPORT ─────────────────────────────── */
+  .sample { background: var(--cream); }
+
+  .sample-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 64px;
+  }
+  @media (max-width: 900px) { .sample-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .sample-mockup {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+    position: relative;
+    box-shadow: 0 60px 100px -30px rgba(27, 42, 74, 0.5);
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .sample-mockup:hover { transform: translateY(-8px) rotate(-1deg); }
+  .sample-mockup::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px;
+    background: var(--gold);
+  }
+  .sample-mockup-inner {
+    padding: 60px 48px;
+    color: var(--cream);
+    height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .sample-mockup .doc-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .sample-mockup .doc-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .sample-mockup .doc-title em { font-style: italic; color: var(--gold); }
+  .sample-mockup .doc-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: rgba(245, 241, 232, 0.6);
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+  .sample-mockup .doc-line {
+    height: 1px; background: rgba(212, 168, 67, 0.3); margin: 24px 0;
+  }
+  .sample-mockup .doc-stat {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .sample-mockup .doc-stat-label {
+    font-size: 12px;
+    color: rgba(245, 241, 232, 0.6);
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+  .sample-mockup .doc-bars {
+    display: flex; gap: 8px; align-items: flex-end; height: 60px;
+    margin-top: auto;
+  }
+  .sample-mockup .doc-bars div {
+    flex: 1;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .sample-mockup .doc-bars div:nth-child(1) { height: 30%; }
+  .sample-mockup .doc-bars div:nth-child(2) { height: 60%; }
+  .sample-mockup .doc-bars div:nth-child(3) { height: 45%; }
+  .sample-mockup .doc-bars div:nth-child(4) { height: 90%; opacity: 1; }
+  .sample-mockup .doc-bars div:nth-child(5) { height: 70%; }
+  .sample-mockup .doc-bars div:nth-child(6) { height: 50%; }
+  .sample-mockup .doc-bars div:nth-child(7) { height: 35%; }
+
+  .sample-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--navy-deep);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .sample-content h3 em { font-style: italic; color: var(--gold); }
+  .sample-content p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .sample-content .disclaimer {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--gold);
+    padding-left: 18px;
+    margin: 28px 0 32px;
+  }
+  .cta-secondary {
+    display: inline-flex; align-items: center; gap: 12px;
+    color: var(--navy-deep);
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--navy-deep);
+    transition: all 0.3s;
+  }
+  .cta-secondary:hover { color: var(--gold); border-color: var(--gold); gap: 18px; }
+
+  /* ─── PROCESS / STEPS ─────────────────────────────── */
+  .process { background: var(--paper); }
+
+  .steps-list {
+    margin-top: 80px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .step {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    transition: padding 0.4s ease;
+  }
+  .step:hover { padding-left: 16px; }
+  @media (max-width: 800px) {
+    .step { grid-template-columns: 1fr; gap: 12px; padding: 40px 0; }
+  }
+
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 56px;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--navy-deep);
+    line-height: 1.15;
+  }
+  .step p {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ─── FOUNDING COHORT ─────────────────────────────── */
+  .cohort {
+    background: var(--cream-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .cohort::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cohort::after {
+    content: "";
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cohort-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 900px) { .cohort-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .cohort-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--navy-deep);
+    margin-bottom: 28px;
+  }
+  .cohort-content h2 em { font-style: italic; color: var(--gold); }
+  .cohort-content p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+
+  .cohort-card {
+    background: var(--navy-deep);
+    color: var(--cream);
+    padding: 48px 44px;
+    position: relative;
+    box-shadow: 0 40px 80px -20px rgba(27, 42, 74, 0.4);
+  }
+  .cohort-card .cohort-label {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .cohort-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 32px;
+  }
+  .cohort-card h3 em { font-style: italic; color: var(--gold); }
+  .cohort-card ul { list-style: none; }
+  .cohort-card li {
+    padding: 18px 0;
+    border-top: 1px dashed rgba(212, 168, 67, 0.25);
+    font-size: 15px;
+    color: rgba(245, 241, 232, 0.85);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .cohort-card li::before {
+    content: "→";
+    color: var(--gold);
+    font-family: 'Fraunces', serif;
+    flex-shrink: 0;
+  }
+  .cohort-card .spots {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--gold);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .cohort-card .spots-num {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 500;
+  }
+  .cohort-card .spots-label {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: rgba(245, 241, 232, 0.7);
+    text-align: right;
+    max-width: 140px;
+  }
+
+  /* ─── FIT / NOT FIT ─────────────────────────────── */
+  .fit { background: var(--paper); }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 80px;
+  }
+  @media (max-width: 800px) { .fit-grid { grid-template-columns: 1fr; } }
+
+  .fit-col {
+    padding: 56px 56px 56px 0;
+  }
+  .fit-col:last-child {
+    padding: 56px 0 56px 56px;
+    border-left: 1px solid var(--line-soft);
+  }
+  @media (max-width: 800px) {
+    .fit-col, .fit-col:last-child {
+      padding: 48px 0;
+      border-left: none;
+      border-top: 1px solid var(--line-soft);
+    }
+    .fit-col:first-child { border-top: none; }
+  }
+
+  .fit-col .fit-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .fit-col:last-child .fit-label { color: var(--terra); }
+
+  .fit-col h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--navy-deep);
+    margin-bottom: 36px;
+  }
+
+  .fit-col ul { list-style: none; }
+  .fit-col li {
+    padding: 18px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .fit-col li::before {
+    content: "✓";
+    color: var(--sage);
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .fit-col:last-child li::before {
+    content: "×";
+    color: var(--terra);
+    font-size: 22px;
+    line-height: 0.8;
+  }
+
+  /* ─── ABOUT ─────────────────────────────── */
+  .about {
+    background: var(--navy-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .about::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212, 168, 67, 0.06), transparent 60%);
+    pointer-events: none;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .about-portrait {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--terra) 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  }
+  .about-portrait::after {
+    content: "TP";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 140px;
+    font-weight: 300;
+    color: rgba(27, 42, 74, 0.4);
+    font-style: italic;
+  }
+
+  .about-content .section-num { color: var(--gold); }
+  .about-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .about-content h2 em { font-style: italic; color: var(--gold); }
+  .about-content p {
+    color: rgba(245, 241, 232, 0.78);
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+  .about-content .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--gold);
+    margin-top: 32px;
+  }
+
+  /* ─── FAQ ─────────────────────────────── */
+  .faq { background: var(--cream); }
+  .faq-list { margin-top: 64px; }
+  .faq-item {
+    border-top: 1px solid var(--line-soft);
+    padding: 32px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--line-soft); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--navy-deep);
+    line-height: 1.3;
+  }
+  .faq-q .toggle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--gold);
+    transition: transform 0.4s ease;
+    flex-shrink: 0;
+    margin-left: 24px;
+  }
+  .faq-item.open .toggle { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.4s ease;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-top: 20px;
+  }
+
+  /* ─── FINAL CTA ─────────────────────────────── */
+  .final-cta {
+    background: var(--navy-deep);
+    color: var(--cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(212, 168, 67, 0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+    position: relative; z-index: 2;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--gold); }
+  .final-cta p {
+    font-size: 19px;
+    color: rgba(245, 241, 232, 0.72);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+    position: relative; z-index: 2;
+  }
+  .final-cta .cta-primary { position: relative; z-index: 2; }
+  .final-cta .email-fallback {
+    margin-top: 32px;
+    font-size: 14px;
+    color: rgba(245, 241, 232, 0.6);
+    position: relative; z-index: 2;
+  }
+  .final-cta .email-fallback a { color: var(--gold); text-decoration: none; }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    background: var(--navy-deep);
+    color: rgba(245, 241, 232, 0.5);
+    padding: 48px 0;
+    border-top: 1px solid rgba(212, 168, 67, 0.15);
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  footer .logo { font-size: 18px; margin-bottom: 12px; display: inline-block; }
+
+  /* ─── MODAL ─────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(19, 31, 56, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 200;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.open { display: flex; opacity: 1; }
+  .modal {
+    background: var(--cream);
+    max-width: 560px;
+    width: 100%;
+    padding: 56px 48px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--gold);
+  }
+  .modal h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--navy-deep);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .modal h2 em { font-style: italic; color: var(--gold); }
+  .modal-sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .modal .close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none; border: none;
+    font-size: 28px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    line-height: 1;
+  }
+  .modal .close:hover { color: var(--terra); }
+
+  /* Form */
+  .form-group { margin-bottom: 22px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy-deep);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--navy-deep);
+    transition: border-color 0.3s;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .modal .cta-primary {
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  /* ─── Sticky scarcity bar (mobile) ─── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--gold);
+    color: var(--navy-deep);
+    padding: 14px 20px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    font-size: 13px;
+    font-weight: 600;
+    border-top: 2px solid var(--navy-deep);
+  }
+  .sticky-bar a {
+    color: var(--navy-deep);
+    text-decoration: none;
+    background: var(--navy-deep);
+    color: var(--gold);
+    padding: 8px 14px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 700px) { .sticky-bar { display: flex; } }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="#" class="logo">Food <span>Factor</span></a>
+  <a href="#cta" class="nav-cta">Claim a Spot</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow reveal">For Vancouver Restaurants</div>
+        <h1 class="reveal delay-1">
+          There's <span class="num">$40,000</span> a year hiding in your POS data. <em>I'll find it in 7 days.</em> Free.
+        </h1>
+        <p class="hero-sub reveal delay-2">
+          The Food Factor Profit Audit. Three findings. Real dollar impact. Delivered in person at your restaurant.
+        </p>
+        <a href="#cta" class="cta-primary reveal delay-3" onclick="openModal(event)">
+          Claim a Founding Audit
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+        <div class="hero-meta reveal delay-4">
+          <span class="pulse"></span>
+          <span>3 SPOTS REMAINING — VANCOUVER ONLY — THEN $500</span>
+        </div>
+      </div>
+
+      <div class="reveal delay-2">
+        <div class="proof-card">
+          <div class="stamp">
+            <span>SAMPLE FINDING</span>
+            <span>VAN, BC</span>
+          </div>
+          <div class="big-num"><em>$73,400</em></div>
+          <div class="big-label">annual margin leak — found in 6 days</div>
+
+          <div class="line-item">
+            <span>Mispriced top sellers</span>
+            <span>−$28,200</span>
+          </div>
+          <div class="line-item">
+            <span>Overstaffed Tue/Wed lunch</span>
+            <span>−$31,600</span>
+          </div>
+          <div class="line-item">
+            <span>Repeat guest churn (review NLP)</span>
+            <span>−$13,600</span>
+          </div>
+          <div class="total">
+            <span>Recoverable</span>
+            <span>$73,400</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="problem">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">01 — The Premise</div>
+      <h2 class="section-title">Your numbers <em>know things</em> you don't.</h2>
+      <p class="section-sub">
+        Most Vancouver restaurants are leaving real money on the table every month — not because the team isn't working hard, but because no one has time to sit down and actually read what the data is saying. The POS exports the numbers. The reviews pile up. The labor reports get filed. Nothing connects.
+      </p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal delay-1">
+        <div class="problem-num">i.</div>
+        <h3>Menu margin drift</h3>
+        <p>Your top sellers aren't your top earners. The dish you push every night is quietly the one with the worst contribution margin — and you're discounting it.</p>
+      </div>
+      <div class="problem-card reveal delay-2">
+        <div class="problem-num">ii.</div>
+        <h3>Labor that doesn't match the door</h3>
+        <p>You're staffed for the night you wish you had, not the night you're actually running. Tuesday is overstaffed. Saturday at 8:45pm is underwater. Every week.</p>
+      </div>
+      <div class="problem-card reveal delay-3">
+        <div class="problem-num">iii.</div>
+        <h3>The complaint you keep getting</h3>
+        <p>There's one thing your guests have mentioned in 47 reviews this year. You've heard about it twice. It's costing you repeat visits — and you can't even name it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DELIVERABLE ═══ -->
+<section class="deliverable">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">02 — The Deliverable</div>
+      <h2 class="section-title">What lands on your desk <em>in 7 days.</em></h2>
+      <p class="section-sub">
+        A 12–15 page report. Three findings. Each tied to a dollar figure. Delivered in person, walked through line by line, at your restaurant.
+      </p>
+    </div>
+
+    <div class="deliv-grid">
+      <div class="deliv-card reveal delay-1">
+        <div class="deliv-icon">i</div>
+        <h3>The Menu Finding</h3>
+        <p>Which items are draining your margin, which are your real heroes, and exactly what to reprice, retire, or reposition. With the dollar impact spelled out.</p>
+      </div>
+      <div class="deliv-card reveal delay-2">
+        <div class="deliv-icon">ii</div>
+        <h3>The Labor Finding</h3>
+        <p>Where your schedule and your sales curve disagree. The shifts to trim, the shifts to reinforce, and what it's worth annually if you fix it.</p>
+      </div>
+      <div class="deliv-card reveal delay-3">
+        <div class="deliv-icon">iii</div>
+        <h3>The Guest Experience Finding</h3>
+        <p>What your reviews are actually telling you — pulled from every Google and Yelp review using NLP. The recurring complaint you can fix this month.</p>
+      </div>
+    </div>
+
+    <div class="walkthrough-callout reveal">
+      <div class="plus">+</div>
+      <div>
+        <h3>The 60-minute walkthrough.</h3>
+        <p>I come to your restaurant. I sit down with you, your GM, and your chef. We go through every finding on a screen. You ask anything. You leave with a one-page action list. No sales pitch unless you ask for one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SAMPLE ═══ -->
+<section class="sample">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">03 — The Standard</div>
+    </div>
+    <div class="sample-grid">
+      <div class="sample-mockup reveal">
+        <div class="sample-mockup-inner">
+          <div class="doc-label">SAMPLE REPORT — ILLUSTRATIVE</div>
+          <div class="doc-title">Coastal Table</div>
+          <div class="doc-title"><em>Bistro & Bar</em></div>
+          <div class="doc-sub">Monthly Profit Intelligence — Q3</div>
+          <div class="doc-line"></div>
+          <div class="doc-stat">$184K</div>
+          <div class="doc-stat-label">ANNUAL OPPORTUNITY IDENTIFIED</div>
+          <div class="doc-bars">
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sample-content reveal delay-1">
+        <h3>What the deliverable <em>actually</em> looks like.</h3>
+        <p>Below is an illustrative sample built on a fictional Vancouver restaurant — same format, same depth, same standard of work I'd deliver to you. Real client reports are confidential.</p>
+        <div class="disclaimer">"Coastal Table Bistro & Bar" is a fictional restaurant created to demonstrate the Food Factor methodology. All names, numbers, and findings are illustrative.</div>
+        <a href="#" class="cta-secondary" onclick="alert('Upload the Coastal Table PDF to /sample.pdf and replace this link.'); return false;">
+          View the Sample Report (PDF)
+          <svg width="16" height="12" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section class="process">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">04 — The Process</div>
+      <h2 class="section-title">Four steps. Seven days. <em>Zero IT lift.</em></h2>
+    </div>
+
+    <div class="steps-list">
+      <div class="step reveal">
+        <div class="step-num">i.</div>
+        <h3>You send me your exports</h3>
+        <p>A 15-minute handoff. POS sales for the last 60 days, labor/timecard report, and your Google + Yelp listing URLs. Square, TouchBistro, and Lightspeed all export this in two clicks. I'll send you the exact instructions.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">ii.</div>
+        <h3>I do the work</h3>
+        <p>Your data runs through the same pipelines I built for restaurant operations analysis — POS, labor, and review NLP. I'm looking for the three findings that move real money.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">iii.</div>
+        <h3>I show up</h3>
+        <p>60-minute working session at your restaurant, between services. You, me, the report on a screen, your team in the room.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">iv.</div>
+        <h3>You decide what to do</h3>
+        <p>You leave with a one-page action list and the full PDF. What you do with it is up to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COHORT ═══ -->
+<section class="cohort">
+  <div class="container">
+    <div class="cohort-grid">
+      <div class="cohort-content reveal">
+        <div class="section-num">05 — The Offer</div>
+        <h2>Why this is <em>free</em> right now.</h2>
+        <p>Food Factor is new. I'm building a Vancouver client base from zero, and the fastest way to do that isn't a louder pitch — it's letting three operators see the work and judge it themselves.</p>
+        <p>So I'm giving the first three audits away in exchange for three things: honest feedback, permission to use your audit as an anonymized case study, and one introduction to another operator if the work earns it.</p>
+      </div>
+
+      <div class="cohort-card reveal delay-1">
+        <div class="cohort-label">— THE FOUNDING COHORT —</div>
+        <h3>Three spots. <em>One per cuisine category.</em></h3>
+        <ul>
+          <li>Audit value: $500 — yours: free</li>
+          <li>One restaurant per category, first come first served</li>
+          <li>After three are claimed, the audit returns to $500</li>
+          <li>No retainer required. No catch.</li>
+        </ul>
+        <div class="spots">
+          <div class="spots-num">03</div>
+          <div class="spots-label">SPOTS<br/>REMAINING</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FIT / NOT FIT ═══ -->
+<section class="fit">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">06 — The Fit</div>
+      <h2 class="section-title">Be honest with yourself <em>before you book.</em></h2>
+    </div>
+
+    <div class="fit-grid">
+      <div class="fit-col reveal">
+        <div class="fit-label">— this is for you if</div>
+        <h3>You're ready to hear it.</h3>
+        <ul>
+          <li>You run a Vancouver restaurant doing $1.5M+ in annual revenue</li>
+          <li>You're using Square, TouchBistro, or Lightspeed (or you can export a basic sales CSV)</li>
+          <li>You're the owner, GM, or operations lead — someone who can act on what we find</li>
+          <li>You'll give me 60 minutes in person when the report is ready</li>
+        </ul>
+      </div>
+      <div class="fit-col reveal delay-1">
+        <div class="fit-label">— this isn't for you if</div>
+        <h3>You're not ready yet.</h3>
+        <ul>
+          <li>You don't actually want to know what your data says</li>
+          <li>You won't make changes even if the numbers are obvious</li>
+          <li>You want a software tool, not a person sitting across from you</li>
+          <li>You can't get me 60 days of POS exports</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-portrait reveal"></div>
+      <div class="about-content reveal delay-1">
+        <div class="section-num">07 — The Person</div>
+        <h2>Who you'd <em>actually</em> be working with.</h2>
+        <p>I'm Tushar Pingle. I built Food Factor because Vancouver's restaurants deserve the same kind of operational intelligence that big chains pay six figures for — delivered by a person who understands the numbers and the room.</p>
+        <p>My background is in data engineering and analytics: building pipelines, modeling operations, finding the signal in messy data. I'm not a restaurant consultant who learned spreadsheets. I'm a data person who fell in love with how restaurants actually work, and I built the tooling to prove it.</p>
+        <p>The audit you'd get is the same work I'd put in front of a Toptable or Glowbal exec. You just happen to be first.</p>
+        <div class="signature">— Tushar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq">
+  <div class="container-narrow">
+    <div class="reveal">
+      <div class="section-num">08 — The Questions</div>
+      <h2 class="section-title">Questions you're <em>probably</em> asking.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is my data safe? <span class="toggle">+</span></div>
+        <div class="faq-a">Yes. Your exports stay on my machine, never get shared, and are deleted after the engagement unless you tell me otherwise. I'll sign an NDA before you send a single file if you want one.</div>
+      </div>
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What if I don't have 60 days of clean data? <span class="toggle">+</span></div>
+        <div class="faq-a">30 will do. The findings will be slightly less robust but still real. Send what you have.</div>
+      </div>
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do I have to sign up for the monthly retainer after? <span class="toggle">+</span></div>
+        <div class="faq-a">No. Zero pressure. The audit is a complete deliverable on its own. If the work earns the next conversation, we'll have it. If not, you keep the report and we shake hands.</div>
+      </div>
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How is this different from my POS dashboard? <span class="toggle">+</span></div>
+        <div class="faq-a">Your POS shows you what happened. The audit tells you what to do about it — and connects what's happening in sales to what's happening in labor and what your guests are writing online. No POS dashboard does that.</div>
+      </div>
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Why should I trust a free audit? <span class="toggle">+</span></div>
+        <div class="faq-a">You shouldn't, on faith. Read the sample report. If the work is good, the work speaks. If it isn't, you've lost a 15-minute file upload and a 60-minute meeting.</div>
+      </div>
+      <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+        <div class="faq-q">I'm part of a hospitality group. Can the audit cover multiple locations? <span class="toggle">+</span></div>
+        <div class="faq-a">The free audit is one location. If you operate a group, email me directly at tushar@foodfactor.ca and we'll talk about a group-level engagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final-cta" id="cta">
+  <div class="container">
+    <div class="reveal">
+      <h2>Three spots.<br/><em>Then it's $500.</em></h2>
+      <p>If you've read this far, you already know if it's a fit. Take the spot.</p>
+      <a href="#" class="cta-primary" onclick="openModal(event)">
+        Claim my Founding Audit
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </a>
+      <div class="email-fallback">
+        Or email Tushar directly: <a href="mailto:tushar@foodfactor.ca">tushar@foodfactor.ca</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="logo">Food <span style="color: var(--gold);">Factor</span></div>
+    <div>Restaurant intelligence, in person. Vancouver, BC.</div>
+    <div style="margin-top: 16px; font-size: 12px; opacity: 0.6;">© 2026 Food Factor. Built for restaurants that want to know.</div>
+  </div>
+</footer>
+
+<!-- ═══ MOBILE STICKY BAR ═══ -->
+<div class="sticky-bar">
+  <span>3 founding spots — free</span>
+  <a href="#" onclick="openModal(event)">Claim →</a>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>Tell me about your <em>restaurant.</em></h2>
+    <p class="modal-sub">Five fields. Then a 20-minute call to confirm fit.</p>
+
+    <!-- TALLY EMBED PLACEHOLDER -->
+    <div id="tally-form-container">
+      <form id="leadForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="form-group">
+          <label>Restaurant name</label>
+          <input type="text" name="restaurant" required />
+        </div>
+        <div class="form-group">
+          <label>Your role</label>
+          <select name="role" required>
+            <option value="">Select one…</option>
+            <option>Owner</option>
+            <option>GM / General Manager</option>
+            <option>Chef</option>
+            <option>Operations</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label>Which POS do you use?</label>
+          <select name="pos" required>
+            <option value="">Select one…</option>
+            <option>Square</option>
+            <option>TouchBistro</option>
+            <option>Lightspeed</option>
+            <option>Other</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+        <button type="submit" class="cta-primary">
+          Continue to Booking
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Nav scroll ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // ── Reveal on scroll ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Modal ──
+  function openModal(e) {
+    if (e) e.preventDefault();
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target.id === 'modal') closeModal();
+  });
+
+  // ── Form submit (placeholder — replace with Tally embed) ──
+  // CALENDLY URL — REPLACE THIS WITH YOUR REAL CALENDLY LINK
+  const CALENDLY_URL = "https://calendly.com/tush-pingle/30min";
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // In production: replace this whole form with a Tally embed.
+    // Tally → New form → Embed → paste their <script> tag in place of this <form>.
+    // Tally has a built-in "redirect on submit" → set it to your Calendly URL.
+    alert("Form submitted! In production, this redirects to Calendly.\n\nNext steps:\n1. Replace this form with a Tally embed\n2. Set Tally redirect URL to your Calendly link\n3. Update CALENDLY_URL in this script");
+    window.location.href = CALENDLY_URL;
+  }
+
+  // ── ESC closes modal ──
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>
