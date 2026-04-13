@@ -6,16 +6,14 @@
 <title>The Profit Audit — Food Factor</title>
 <meta name="description" content="A free, in-person profit audit for Vancouver restaurants. Three findings. Real dollar impact. Delivered in seven days by Tushar Pingle." />
 
-<!-- Open Graph -->
 <meta property="og:title" content="The Profit Audit — Food Factor" />
 <meta property="og:description" content="There's $40,000 a year hiding in your POS data. I'll find it in 7 days. Free." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://foodfactor.ca/audit" />
 
-<!-- Fonts: Fraunces (display serif, characterful) + Inter Tight (clean body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -24,6 +22,7 @@
     --navy-soft: #2A3A5F;
     --gold: #D4A843;
     --gold-soft: #E8C66B;
+    --gold-deep: #B8902F;
     --sage: #6B8F71;
     --sage-soft: #8FAE94;
     --terra: #C85C3B;
@@ -37,7 +36,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
   body {
@@ -50,16 +48,19 @@
     overflow-x: hidden;
   }
 
-  .serif { font-family: 'Fraunces', Georgia, serif; font-feature-settings: "ss01", "ss02"; }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* ─── LAYOUT ─────────────────────────────── */
   .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
   .container-narrow { max-width: 920px; margin: 0 auto; padding: 0 32px; }
 
   section { padding: 120px 0; position: relative; }
-  @media (max-width: 768px) { section { padding: 80px 0; } .container, .container-narrow { padding: 0 24px; } }
+  @media (max-width: 768px) {
+    section { padding: 80px 0; }
+    .container, .container-narrow { padding: 0 24px; }
+  }
 
-  /* ─── NAV ─────────────────────────────── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 24px 32px;
@@ -69,7 +70,7 @@
     transition: all 0.4s ease;
   }
   nav.scrolled {
-    background: rgba(19, 31, 56, 0.92);
+    background: rgba(19, 31, 56, 0.94);
     backdrop-filter: blur(20px);
     padding: 16px 32px;
     border-bottom: 1px solid var(--line);
@@ -79,17 +80,32 @@
     font-size: 22px; font-weight: 500;
     color: var(--cream);
     letter-spacing: -0.01em;
+    text-decoration: none;
   }
   .logo span { color: var(--gold); }
+
+  .nav-right { display: flex; align-items: center; gap: 32px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  @media (max-width: 800px) { .nav-links { display: none; } }
+
   .nav-cta {
-    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--cream); text-decoration: none;
     padding: 10px 20px; border: 1px solid var(--gold);
     transition: all 0.3s;
   }
   .nav-cta:hover { background: var(--gold); color: var(--navy); }
 
-  /* ─── HERO ─────────────────────────────── */
+  /* HERO */
   .hero {
     background: var(--navy-deep);
     color: var(--cream);
@@ -108,7 +124,6 @@
     pointer-events: none;
   }
 
-  /* Decorative grain */
   .hero::after {
     content: ""; position: absolute; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -133,9 +148,7 @@
     margin-bottom: 32px;
     font-weight: 500;
   }
-  .eyebrow::before {
-    content: ""; width: 32px; height: 1px; background: var(--gold);
-  }
+  .eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--gold); }
 
   .hero h1 {
     font-family: 'Fraunces', serif;
@@ -146,15 +159,8 @@
     margin-bottom: 36px;
     color: var(--cream);
   }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-    font-weight: 300;
-  }
-  .hero h1 .num {
-    font-feature-settings: "ss01";
-    font-weight: 500;
-  }
+  .hero h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+  .hero h1 .num { font-feature-settings: "ss01"; font-weight: 500; }
 
   .hero-sub {
     font-size: 19px;
@@ -180,6 +186,7 @@
     position: relative;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
+    font-family: inherit;
   }
   .cta-primary::before {
     content: ""; position: absolute; inset: 0;
@@ -213,7 +220,6 @@
     100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
   }
 
-  /* Hero side panel — receipt-style proof card */
   .proof-card {
     background: var(--cream);
     color: var(--navy-deep);
@@ -233,6 +239,7 @@
     color: var(--ink-soft);
     margin-bottom: 24px;
     display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
   }
   .proof-card .big-num {
     font-family: 'Fraunces', serif;
@@ -243,9 +250,7 @@
     margin-bottom: 8px;
     letter-spacing: -0.03em;
   }
-  .proof-card .big-num em {
-    color: var(--terra); font-style: italic; font-weight: 400;
-  }
+  .proof-card .big-num em { color: var(--terra); font-style: italic; font-weight: 400; }
   .proof-card .big-label {
     font-family: 'Fraunces', serif;
     font-style: italic;
@@ -259,7 +264,7 @@
     border-top: 1px dashed rgba(27, 42, 74, 0.2);
     font-size: 14px;
   }
-  .proof-card .line-item span:last-child { font-weight: 500; color: var(--terra); }
+  .proof-card .line-item span:last-child { font-weight: 500; color: var(--terra); font-family: 'JetBrains Mono', monospace; }
   .proof-card .total {
     margin-top: 12px; padding-top: 18px;
     border-top: 2px solid var(--navy-deep);
@@ -268,9 +273,9 @@
     font-size: 18px;
     font-weight: 600;
   }
-  .proof-card .total span:last-child { color: var(--terra); }
+  .proof-card .total span:last-child { color: var(--terra); font-family: 'JetBrains Mono', monospace; }
 
-  /* ─── REVEAL ANIM ─────────────────────────────── */
+  /* REVEAL */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal.delay-1 { transition-delay: 0.15s; }
@@ -278,14 +283,14 @@
   .reveal.delay-3 { transition-delay: 0.45s; }
   .reveal.delay-4 { transition-delay: 0.6s; }
 
-  /* ─── SECTION HEADERS ─────────────────────────────── */
+  /* SECTION HEADERS */
   .section-num {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
     color: var(--gold);
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
   .section-title {
     font-family: 'Fraunces', serif;
@@ -306,7 +311,38 @@
     font-weight: 300;
   }
 
-  /* ─── PROBLEM SECTION ─────────────────────────────── */
+  /* TOOLS STRIP */
+  .tools-strip {
+    background: var(--navy-deep);
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .tools-strip-label {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 36px;
+    color: rgba(245, 241, 232, 0.55);
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-style: italic;
+  }
+  .tools-grid span { transition: color 0.3s; }
+  .tools-grid span:hover { color: var(--gold); }
+  .tools-grid .dot { color: var(--gold); font-style: normal; }
+
+  /* PROBLEM */
   .problem { background: var(--paper); }
   .problem-grid {
     display: grid;
@@ -328,7 +364,6 @@
   @media (max-width: 800px) {
     .problem-card { padding: 48px 0 !important; border-right: none; }
   }
-
   .problem-card:hover { background: var(--cream-warm); }
 
   .problem-num {
@@ -352,7 +387,7 @@
     line-height: 1.6;
   }
 
-  /* ─── DELIVERABLE SECTION ─────────────────────────────── */
+  /* DELIVERABLE */
   .deliverable {
     background: var(--navy-deep);
     color: var(--cream);
@@ -367,11 +402,23 @@
   .deliverable .section-title { color: var(--cream); }
   .deliverable .section-sub { color: rgba(245, 241, 232, 0.72); }
 
+  .sample-tag {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 8px 16px;
+    border: 1px dashed var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   .deliv-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-top: 72px;
+    margin-top: 60px;
     position: relative; z-index: 2;
   }
   @media (max-width: 900px) { .deliv-grid { grid-template-columns: 1fr; } }
@@ -382,38 +429,63 @@
     padding: 44px 36px;
     position: relative;
     transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
   }
   .deliv-card:hover {
     background: rgba(245, 241, 232, 0.08);
     border-color: var(--gold);
     transform: translateY(-6px);
   }
-  .deliv-card .deliv-icon {
-    width: 48px; height: 48px;
-    border: 1px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 32px;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
+  .deliv-card .deliv-finding-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
     color: var(--gold);
-    font-size: 22px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
   .deliv-card h3 {
     font-family: 'Fraunces', serif;
     font-size: 24px;
     font-weight: 500;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: var(--cream);
     line-height: 1.2;
   }
-  .deliv-card p {
-    color: rgba(245, 241, 232, 0.7);
-    font-size: 15px;
-    line-height: 1.65;
+  .deliv-card .deliv-quote {
+    color: rgba(245, 241, 232, 0.72);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
   }
+  .deliv-card .deliv-impact {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(212, 168, 67, 0.3);
+  }
+  .deliv-card .deliv-impact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(245, 241, 232, 0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .deliv-card .deliv-impact-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .deliv-card .deliv-impact-num em { font-style: italic; font-weight: 300; }
 
   .walkthrough-callout {
-    margin-top: 48px;
+    margin-top: 40px;
     padding: 48px 56px;
     background: var(--gold);
     color: var(--navy-deep);
@@ -446,8 +518,153 @@
     max-width: 580px;
   }
 
-  /* ─── SAMPLE REPORT ─────────────────────────────── */
-  .sample { background: var(--cream); }
+  /* INTEGRATED INSIGHTS */
+  .insights { background: var(--paper); position: relative; }
+  .insights .section-title { max-width: 900px; }
+
+  .insights-intro {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 900px) { .insights-intro { grid-template-columns: 1fr; gap: 32px; } }
+
+  .insights-intro .why-matters {
+    border-left: 2px solid var(--gold);
+    padding-left: 28px;
+  }
+  .insights-intro .why-matters .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .insights-intro .why-matters p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .insight-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  @media (max-width: 800px) { .insight-list { grid-template-columns: 1fr; } }
+
+  .insight-item {
+    padding: 48px 40px 48px 0;
+    border-bottom: 1px solid var(--line-soft);
+    border-right: 1px solid var(--line-soft);
+    transition: background 0.4s ease, padding 0.4s ease;
+  }
+  .insight-item:nth-child(even) {
+    padding-left: 40px;
+    padding-right: 0;
+    border-right: none;
+  }
+  @media (max-width: 800px) {
+    .insight-item, .insight-item:nth-child(even) {
+      padding: 40px 0;
+      border-right: none;
+    }
+  }
+  .insight-item:hover { background: var(--cream-warm); }
+
+  .insight-tag {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .insight-tag span {
+    padding: 4px 10px;
+    background: rgba(212, 168, 67, 0.12);
+    color: var(--gold-deep);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+  }
+
+  .insight-item h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--navy-deep);
+    margin-bottom: 16px;
+  }
+  .insight-item p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .insight-item .impact {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+
+  /* METHODOLOGY */
+  .method { background: var(--cream); overflow: hidden; }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 64px;
+  }
+  @media (max-width: 900px) { .method-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .method-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--navy-deep);
+    margin-bottom: 24px;
+  }
+  .method-content h3 em { font-style: italic; color: var(--gold); }
+  .method-content p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .method-diagram {
+    position: relative;
+    padding: 40px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+  }
+  .method-diagram-label {
+    position: absolute;
+    top: -10px; left: 24px;
+    background: var(--cream);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-deep);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .method-svg { width: 100%; height: auto; }
+
+  /* SAMPLE */
+  .sample { background: var(--paper); }
 
   .sample-grid {
     display: grid;
@@ -465,6 +682,8 @@
     box-shadow: 0 60px 100px -30px rgba(27, 42, 74, 0.5);
     overflow: hidden;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    display: block;
   }
   .sample-mockup:hover { transform: translateY(-8px) rotate(-1deg); }
   .sample-mockup::before {
@@ -472,7 +691,7 @@
     background: var(--gold);
   }
   .sample-mockup-inner {
-    padding: 60px 48px;
+    padding: 56px 44px;
     color: var(--cream);
     height: 100%;
     display: flex; flex-direction: column;
@@ -481,55 +700,62 @@
     font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
   }
   .sample-mockup .doc-title {
     font-family: 'Fraunces', serif;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1.05;
     font-weight: 400;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
   .sample-mockup .doc-title em { font-style: italic; color: var(--gold); }
   .sample-mockup .doc-sub {
     font-family: 'Fraunces', serif;
     font-style: italic;
     color: rgba(245, 241, 232, 0.6);
-    font-size: 15px;
-    margin-bottom: 40px;
+    font-size: 14px;
+    margin-bottom: 36px;
   }
   .sample-mockup .doc-line {
-    height: 1px; background: rgba(212, 168, 67, 0.3); margin: 24px 0;
+    height: 1px; background: rgba(212, 168, 67, 0.3); margin: 20px 0;
   }
   .sample-mockup .doc-stat {
     font-family: 'Fraunces', serif;
-    font-size: 48px;
+    font-size: 44px;
     color: var(--gold);
     line-height: 1;
     font-weight: 500;
     margin-bottom: 4px;
   }
   .sample-mockup .doc-stat-label {
-    font-size: 12px;
+    font-size: 11px;
     color: rgba(245, 241, 232, 0.6);
     letter-spacing: 0.05em;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
   }
-  .sample-mockup .doc-bars {
-    display: flex; gap: 8px; align-items: flex-end; height: 60px;
+  .sample-mockup .doc-toc {
     margin-top: auto;
+    border-top: 1px solid rgba(212, 168, 67, 0.2);
+    padding-top: 20px;
   }
-  .sample-mockup .doc-bars div {
-    flex: 1;
-    background: var(--gold);
-    opacity: 0.4;
+  .sample-mockup .doc-toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(245, 241, 232, 0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
   }
-  .sample-mockup .doc-bars div:nth-child(1) { height: 30%; }
-  .sample-mockup .doc-bars div:nth-child(2) { height: 60%; }
-  .sample-mockup .doc-bars div:nth-child(3) { height: 45%; }
-  .sample-mockup .doc-bars div:nth-child(4) { height: 90%; opacity: 1; }
-  .sample-mockup .doc-bars div:nth-child(5) { height: 70%; }
-  .sample-mockup .doc-bars div:nth-child(6) { height: 50%; }
-  .sample-mockup .doc-bars div:nth-child(7) { height: 35%; }
+  .sample-mockup .doc-toc-item {
+    display: flex; justify-content: space-between;
+    font-size: 11px;
+    color: rgba(245, 241, 232, 0.7);
+    padding: 4px 0;
+    font-family: 'Fraunces', serif;
+  }
+  .sample-mockup .doc-toc-item span:last-child { color: var(--gold); }
 
   .sample-content h3 {
     font-family: 'Fraunces', serif;
@@ -568,25 +794,26 @@
     border-bottom: 1px solid var(--navy-deep);
     transition: all 0.3s;
   }
-  .cta-secondary:hover { color: var(--gold); border-color: var(--gold); gap: 18px; }
+  .cta-secondary:hover { color: var(--gold-deep); border-color: var(--gold-deep); gap: 18px; }
 
-  /* ─── PROCESS / STEPS ─────────────────────────────── */
-  .process { background: var(--paper); }
+  /* PROCESS */
+  .process { background: var(--navy-deep); color: var(--cream); }
+  .process .section-title { color: var(--cream); }
 
   .steps-list {
     margin-top: 80px;
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid rgba(212, 168, 67, 0.2);
   }
   .step {
     padding: 56px 0;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.15);
     display: grid;
     grid-template-columns: 100px 1fr 1fr;
     gap: 48px;
     align-items: start;
     transition: padding 0.4s ease;
   }
-  .step:hover { padding-left: 16px; }
+  .step:hover { padding-left: 16px; background: rgba(245, 241, 232, 0.02); }
   @media (max-width: 800px) {
     .step { grid-template-columns: 1fr; gap: 12px; padding: 40px 0; }
   }
@@ -603,21 +830,17 @@
     font-family: 'Fraunces', serif;
     font-size: 30px;
     font-weight: 500;
-    color: var(--navy-deep);
+    color: var(--cream);
     line-height: 1.15;
   }
   .step p {
-    color: var(--ink-soft);
+    color: rgba(245, 241, 232, 0.7);
     font-size: 16px;
     line-height: 1.65;
   }
 
-  /* ─── FOUNDING COHORT ─────────────────────────────── */
-  .cohort {
-    background: var(--cream-warm);
-    position: relative;
-    overflow: hidden;
-  }
+  /* COHORT */
+  .cohort { background: var(--cream-warm); position: relative; overflow: hidden; }
   .cohort::before {
     content: "";
     position: absolute;
@@ -672,6 +895,7 @@
     box-shadow: 0 40px 80px -20px rgba(27, 42, 74, 0.4);
   }
   .cohort-card .cohort-label {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 20px;
@@ -712,16 +936,17 @@
     font-weight: 500;
   }
   .cohort-card .spots-label {
-    font-size: 13px;
-    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
     color: rgba(245, 241, 232, 0.7);
     text-align: right;
     max-width: 140px;
+    text-transform: uppercase;
   }
 
-  /* ─── FIT / NOT FIT ─────────────────────────────── */
+  /* FIT */
   .fit { background: var(--paper); }
-
   .fit-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -730,9 +955,7 @@
   }
   @media (max-width: 800px) { .fit-grid { grid-template-columns: 1fr; } }
 
-  .fit-col {
-    padding: 56px 56px 56px 0;
-  }
+  .fit-col { padding: 56px 56px 56px 0; }
   .fit-col:last-child {
     padding: 56px 0 56px 56px;
     border-left: 1px solid var(--line-soft);
@@ -750,7 +973,7 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 18px;
-    color: var(--gold);
+    color: var(--gold-deep);
     margin-bottom: 20px;
   }
   .fit-col:last-child .fit-label { color: var(--terra); }
@@ -787,7 +1010,7 @@
     line-height: 0.8;
   }
 
-  /* ─── ABOUT ─────────────────────────────── */
+  /* ABOUT */
   .about {
     background: var(--navy-deep);
     color: var(--cream);
@@ -854,7 +1077,7 @@
     margin-top: 32px;
   }
 
-  /* ─── FAQ ─────────────────────────────── */
+  /* FAQ */
   .faq { background: var(--cream); }
   .faq-list { margin-top: 64px; }
   .faq-item {
@@ -875,7 +1098,7 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 28px;
-    color: var(--gold);
+    color: var(--gold-deep);
     transition: transform 0.4s ease;
     flex-shrink: 0;
     margin-left: 24px;
@@ -890,11 +1113,11 @@
     line-height: 1.65;
   }
   .faq-item.open .faq-a {
-    max-height: 300px;
+    max-height: 400px;
     padding-top: 20px;
   }
 
-  /* ─── FINAL CTA ─────────────────────────────── */
+  /* FINAL CTA */
   .final-cta {
     background: var(--navy-deep);
     color: var(--cream);
@@ -904,8 +1127,7 @@
   }
   .final-cta::before {
     content: ""; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 50% 50%, rgba(212, 168, 67, 0.12), transparent 60%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(212, 168, 67, 0.12), transparent 60%);
     pointer-events: none;
   }
   .final-cta h2 {
@@ -935,7 +1157,6 @@
   }
   .final-cta .email-fallback a { color: var(--gold); text-decoration: none; }
 
-  /* ─── FOOTER ─────────────────────────────── */
   footer {
     background: var(--navy-deep);
     color: rgba(245, 241, 232, 0.5);
@@ -947,7 +1168,7 @@
   }
   footer .logo { font-size: 18px; margin-bottom: 12px; display: inline-block; }
 
-  /* ─── MODAL ─────────────────────────────── */
+  /* MODAL */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(19, 31, 56, 0.85);
@@ -1002,11 +1223,11 @@
   }
   .modal .close:hover { color: var(--terra); }
 
-  /* Form */
   .form-group { margin-bottom: 22px; }
   .form-group label {
     display: block;
-    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--navy-deep);
@@ -1035,7 +1256,7 @@
     margin-top: 12px;
   }
 
-  /* ─── Sticky scarcity bar (mobile) ─── */
+  /* STICKY BAR */
   .sticky-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -1051,14 +1272,13 @@
     border-top: 2px solid var(--navy-deep);
   }
   .sticky-bar a {
-    color: var(--navy-deep);
-    text-decoration: none;
     background: var(--navy-deep);
     color: var(--gold);
     padding: 8px 14px;
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    text-decoration: none;
   }
   @media (max-width: 700px) { .sticky-bar { display: flex; } }
 
@@ -1066,14 +1286,20 @@
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
 <nav id="nav">
-  <a href="#" class="logo">Food <span>Factor</span></a>
-  <a href="#cta" class="nav-cta">Claim a Spot</a>
+  <a href="#top" class="logo">Food <span>Factor</span></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#deliverable">Deliverable</a>
+      <a href="#insights">Insights</a>
+      <a href="#sample">Sample</a>
+      <a href="#process">Process</a>
+    </div>
+    <a href="#cta" class="nav-cta">Claim a Spot</a>
+  </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="container">
     <div class="hero-grid">
       <div>
@@ -1100,24 +1326,28 @@
             <span>SAMPLE FINDING</span>
             <span>VAN, BC</span>
           </div>
-          <div class="big-num"><em>$73,400</em></div>
-          <div class="big-label">annual margin leak — found in 6 days</div>
+          <div class="big-num"><em>$77K+</em></div>
+          <div class="big-label">in recoverable margin — typical audit</div>
 
           <div class="line-item">
             <span>Mispriced top sellers</span>
-            <span>−$28,200</span>
+            <span>−$8.4K</span>
           </div>
           <div class="line-item">
-            <span>Overstaffed Tue/Wed lunch</span>
-            <span>−$31,600</span>
+            <span>Slow-day overstaffing</span>
+            <span>−$12K</span>
           </div>
           <div class="line-item">
-            <span>Repeat guest churn (review NLP)</span>
-            <span>−$13,600</span>
+            <span>Delivery commission leakage</span>
+            <span>−$10.6K</span>
+          </div>
+          <div class="line-item">
+            <span>No-show revenue loss</span>
+            <span>−$45.9K</span>
           </div>
           <div class="total">
-            <span>Recoverable</span>
-            <span>$73,400</span>
+            <span>Total opportunity</span>
+            <span>$77K+</span>
           </div>
         </div>
       </div>
@@ -1125,7 +1355,24 @@
   </div>
 </section>
 
-<!-- ═══ PROBLEM ═══ -->
+<div class="tools-strip">
+  <div class="container">
+    <div class="tools-strip-label">Built for restaurants running</div>
+    <div class="tools-grid">
+      <span>Square</span><span class="dot">·</span>
+      <span>TouchBistro</span><span class="dot">·</span>
+      <span>Lightspeed</span><span class="dot">·</span>
+      <span>OpenTable</span><span class="dot">·</span>
+      <span>Resy</span><span class="dot">·</span>
+      <span>7shifts</span><span class="dot">·</span>
+      <span>Push Operations</span><span class="dot">·</span>
+      <span>Uber Eats</span><span class="dot">·</span>
+      <span>DoorDash</span><span class="dot">·</span>
+      <span>SkipTheDishes</span>
+    </div>
+  </div>
+</div>
+
 <section class="problem">
   <div class="container">
     <div class="reveal">
@@ -1156,32 +1403,46 @@
   </div>
 </section>
 
-<!-- ═══ DELIVERABLE ═══ -->
-<section class="deliverable">
+<section class="deliverable" id="deliverable">
   <div class="container">
     <div class="reveal">
       <div class="section-num">02 — The Deliverable</div>
       <h2 class="section-title">What lands on your desk <em>in 7 days.</em></h2>
       <p class="section-sub">
-        A 12–15 page report. Three findings. Each tied to a dollar figure. Delivered in person, walked through line by line, at your restaurant.
+        Three findings. Each tied to a real dollar figure. Below: actual numbers from a recent audit.
       </p>
+      <div class="sample-tag">↓ Findings shown are from the Coastal Table sample report (illustrative)</div>
     </div>
 
     <div class="deliv-grid">
       <div class="deliv-card reveal delay-1">
-        <div class="deliv-icon">i</div>
-        <h3>The Menu Finding</h3>
-        <p>Which items are draining your margin, which are your real heroes, and exactly what to reprice, retire, or reposition. With the dollar impact spelled out.</p>
+        <div class="deliv-finding-label">Finding 01 — Menu</div>
+        <h3>The dishes you push are the ones killing your margin.</h3>
+        <p class="deliv-quote">"Three high-demand mains carried food costs above 34%. A $2–4 price increase is supported by review sentiment — and recovers margin without touching demand."</p>
+        <div class="deliv-impact">
+          <div class="deliv-impact-label">Annual recovery</div>
+          <div class="deliv-impact-num">$6K–<em>$10K</em></div>
+        </div>
       </div>
+
       <div class="deliv-card reveal delay-2">
-        <div class="deliv-icon">ii</div>
-        <h3>The Labor Finding</h3>
-        <p>Where your schedule and your sales curve disagree. The shifts to trim, the shifts to reinforce, and what it's worth annually if you fix it.</p>
+        <div class="deliv-finding-label">Finding 02 — Labor</div>
+        <h3>Tuesday is staffed like Friday. It earns nothing like Friday.</h3>
+        <p class="deliv-quote">"Highest labor cost % falls on the lowest revenue days. Cutting one FOH shift on Tue/Wed lunch saves real money with zero impact on service or sales."</p>
+        <div class="deliv-impact">
+          <div class="deliv-impact-label">Annual savings</div>
+          <div class="deliv-impact-num">$8K–<em>$12K</em></div>
+        </div>
       </div>
+
       <div class="deliv-card reveal delay-3">
-        <div class="deliv-icon">iii</div>
-        <h3>The Guest Experience Finding</h3>
-        <p>What your reviews are actually telling you — pulled from every Google and Yelp review using NLP. The recurring complaint you can fix this month.</p>
+        <div class="deliv-finding-label">Finding 03 — Reviews + Ops</div>
+        <h3>Your #1 complaint is a $4,000 fix. It's been in your reviews for a year.</h3>
+        <p class="deliv-quote">"34% of negative reviews mentioned noise level. A one-time $2K–$4K acoustic treatment resolves it within 60 days — and pushes your average review score past 4.5."</p>
+        <div class="deliv-impact">
+          <div class="deliv-impact-label">One-time fix</div>
+          <div class="deliv-impact-num">$2K–<em>$4K</em></div>
+        </div>
       </div>
     </div>
 
@@ -1195,33 +1456,182 @@
   </div>
 </section>
 
-<!-- ═══ SAMPLE ═══ -->
-<section class="sample">
+<section class="insights" id="insights">
   <div class="container">
     <div class="reveal">
-      <div class="section-num">03 — The Standard</div>
+      <div class="section-num">03 — The Difference</div>
+      <h2 class="section-title">What I see that <em>no dashboard</em> can show you.</h2>
+    </div>
+
+    <div class="insights-intro">
+      <p class="section-sub reveal">
+        Every POS gives you sales. Every scheduling tool gives you labor. Every review platform gives you complaints. None of them connect to each other. The findings that actually move money live in those connections — and that's the whole point of an audit. Below are five real examples from the Coastal Table audit.
+      </p>
+      <div class="why-matters reveal delay-1">
+        <div class="label">— Why this matters</div>
+        <p>Single-source analysis misses the answer. The audit reads everything at once.</p>
+      </div>
+    </div>
+
+    <div class="insight-list">
+      <div class="insight-item reveal">
+        <div class="insight-tag">
+          <span>Labor</span>
+          <span>Sales</span>
+        </div>
+        <h3>Staffing-revenue mismatch on slow days</h3>
+        <p>Tuesday's labor cost % was the highest of the week, yet Tuesday generated the lowest revenue. Staffing levels averaged within 10% of Friday's — but revenue was 73% lower. A scheduling correction visible only when both data sources are read together.</p>
+        <div class="impact">→ $400–$500/week savings</div>
+      </div>
+
+      <div class="insight-item reveal delay-1">
+        <div class="insight-tag">
+          <span>Menu</span>
+          <span>Reviews</span>
+        </div>
+        <h3>The best-reviewed dishes have the tightest margins</h3>
+        <p>The top three dishes by review sentiment all carried food costs above 34%. Demand was confirmed by both volume and sentiment — meaning a $2–$4 price increase was the highest-ROI menu change available, with near-zero demand risk.</p>
+        <div class="impact">→ $6K–$10K/year</div>
+      </div>
+
+      <div class="insight-item reveal">
+        <div class="insight-tag">
+          <span>Delivery</span>
+          <span>Dine-In</span>
+        </div>
+        <h3>Delivery cannibalizes dine-in on weekdays</h3>
+        <p>Weekday delivery peaked during the same hours (6–8 PM) as dine-in dinner. A weekday-only dine-in special could convert delivery orders — paying 27% commission — back into full-margin covers without losing volume.</p>
+        <div class="impact">→ $3K–$5K/year recovered</div>
+      </div>
+
+      <div class="insight-item reveal delay-1">
+        <div class="insight-tag">
+          <span>Reservations</span>
+          <span>Labor</span>
+        </div>
+        <h3>No-shows compound labor waste</h3>
+        <p>On high-no-show nights, staffing was set based on bookings, not completion rates. With an 8.4% no-show rate, adjusting expected covers downward saves 3–5 labor hours per week during peak service — invisible if you only look at the schedule.</p>
+        <div class="impact">→ $45,894 in missed revenue identified</div>
+      </div>
+
+      <div class="insight-item reveal">
+        <div class="insight-tag">
+          <span>Brunch</span>
+          <span>Margin</span>
+        </div>
+        <h3>Brunch is the under-leveraged growth engine</h3>
+        <p>Brunch items showed the strongest margins and most positive review sentiment, with the lowest labor requirement per cover — yet brunch represented only 4% of total revenue. The expansion case is in the data; nobody had read it.</p>
+        <div class="impact">→ Highest-margin growth lever in the building</div>
+      </div>
+
+      <div class="insight-item reveal delay-1">
+        <div class="insight-tag">
+          <span>Delivery</span>
+          <span>P&L</span>
+        </div>
+        <h3>Effective commissions were 27.5% — not the contracted rate</h3>
+        <p>True commission rate was higher than the headline number across both DoorDash and Uber Eats once promo fees, marketing surcharges, and order-protection costs were included. $10,619 in real platform leakage in a single month, hidden across statements nobody had reconciled.</p>
+        <div class="impact">→ $127K/year in delivery leakage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="method">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">04 — The Method</div>
+      <h2 class="section-title">Five data sources. <em>One report.</em></h2>
+    </div>
+
+    <div class="method-grid">
+      <div class="method-content reveal">
+        <h3>Most consultants read one. <em>I read all five.</em></h3>
+        <p>The reason a Food Factor audit catches what others miss is mechanical: every audit pulls from POS, labor, review NLP, delivery platform statements, and reservation data — then runs them through pipelines I built specifically to find the cross-domain leaks.</p>
+        <p>No single tool on the market does this. Most consultants don't even try. That's the wedge.</p>
+      </div>
+
+      <div class="method-diagram reveal delay-1">
+        <div class="method-diagram-label">// Audit Engine</div>
+        <svg class="method-svg" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#D4A843" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#D4A843" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+
+          <line x1="120" y1="60" x2="320" y2="190" stroke="url(#lineGrad)" stroke-width="1.5"/>
+          <line x1="120" y1="130" x2="320" y2="190" stroke="url(#lineGrad)" stroke-width="1.5"/>
+          <line x1="120" y1="200" x2="320" y2="190" stroke="url(#lineGrad)" stroke-width="1.5"/>
+          <line x1="120" y1="270" x2="320" y2="190" stroke="url(#lineGrad)" stroke-width="1.5"/>
+          <line x1="120" y1="340" x2="320" y2="190" stroke="url(#lineGrad)" stroke-width="1.5"/>
+
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#1B2A4A">
+            <rect x="20" y="48" width="100" height="26" fill="#FAF8F1" stroke="#1B2A4A" stroke-width="1"/>
+            <text x="35" y="65">POS Sales</text>
+            <rect x="20" y="118" width="100" height="26" fill="#FAF8F1" stroke="#1B2A4A" stroke-width="1"/>
+            <text x="35" y="135">Labor</text>
+            <rect x="20" y="188" width="100" height="26" fill="#FAF8F1" stroke="#1B2A4A" stroke-width="1"/>
+            <text x="35" y="205">Reviews</text>
+            <rect x="20" y="258" width="100" height="26" fill="#FAF8F1" stroke="#1B2A4A" stroke-width="1"/>
+            <text x="35" y="275">Delivery</text>
+            <rect x="20" y="328" width="100" height="26" fill="#FAF8F1" stroke="#1B2A4A" stroke-width="1"/>
+            <text x="35" y="345">Reservations</text>
+          </g>
+
+          <rect x="320" y="150" width="160" height="80" fill="#1B2A4A" stroke="#D4A843" stroke-width="2"/>
+          <text x="400" y="180" font-family="Fraunces, serif" font-size="14" fill="#D4A843" text-anchor="middle" font-style="italic">cross-domain</text>
+          <text x="400" y="200" font-family="Fraunces, serif" font-size="14" fill="#D4A843" text-anchor="middle" font-style="italic">analysis</text>
+          <text x="400" y="218" font-family="JetBrains Mono, monospace" font-size="9" fill="#F5F1E8" text-anchor="middle">// food factor engine</text>
+
+          <line x1="400" y1="240" x2="400" y2="290" stroke="#D4A843" stroke-width="1.5"/>
+          <polygon points="395,288 400,298 405,288" fill="#D4A843"/>
+
+          <rect x="320" y="305" width="160" height="40" fill="#D4A843"/>
+          <text x="400" y="322" font-family="Fraunces, serif" font-size="14" fill="#1B2A4A" text-anchor="middle" font-weight="500">3 findings</text>
+          <text x="400" y="338" font-family="JetBrains Mono, monospace" font-size="9" fill="#1B2A4A" text-anchor="middle">tied to real dollars</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sample" id="sample">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">05 — The Standard</div>
     </div>
     <div class="sample-grid">
-      <div class="sample-mockup reveal">
+      <a href="/sample.pdf" target="_blank" class="sample-mockup reveal">
         <div class="sample-mockup-inner">
           <div class="doc-label">SAMPLE REPORT — ILLUSTRATIVE</div>
           <div class="doc-title">Coastal Table</div>
           <div class="doc-title"><em>Bistro & Bar</em></div>
-          <div class="doc-sub">Monthly Profit Intelligence — Q3</div>
+          <div class="doc-sub">Monthly Operations Intelligence</div>
           <div class="doc-line"></div>
-          <div class="doc-stat">$184K</div>
+          <div class="doc-stat">$77K+</div>
           <div class="doc-stat-label">ANNUAL OPPORTUNITY IDENTIFIED</div>
-          <div class="doc-bars">
-            <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+          <div class="doc-toc">
+            <div class="doc-toc-label">// 12 sections / 18 pages</div>
+            <div class="doc-toc-item"><span>Executive Summary</span><span>p.2</span></div>
+            <div class="doc-toc-item"><span>Revenue & Sales</span><span>p.3</span></div>
+            <div class="doc-toc-item"><span>Menu Engineering</span><span>p.5</span></div>
+            <div class="doc-toc-item"><span>Labor Optimization</span><span>p.6</span></div>
+            <div class="doc-toc-item"><span>Review Intelligence</span><span>p.7</span></div>
+            <div class="doc-toc-item"><span>Integrated Insights</span><span>p.10</span></div>
+            <div class="doc-toc-item"><span>Action Plan</span><span>p.11</span></div>
           </div>
         </div>
-      </div>
+      </a>
       <div class="sample-content reveal delay-1">
         <h3>What the deliverable <em>actually</em> looks like.</h3>
-        <p>Below is an illustrative sample built on a fictional Vancouver restaurant — same format, same depth, same standard of work I'd deliver to you. Real client reports are confidential.</p>
-        <div class="disclaimer">"Coastal Table Bistro & Bar" is a fictional restaurant created to demonstrate the Food Factor methodology. All names, numbers, and findings are illustrative.</div>
-        <a href="#" class="cta-secondary" onclick="alert('Upload the Coastal Table PDF to /sample.pdf and replace this link.'); return false;">
-          View the Sample Report (PDF)
+        <p>An 18-page report. Twelve sections. Every chart annotated, every finding tied to a recommendation, every recommendation tied to a dollar figure. Same format, same depth, same standard of work I'd deliver to you.</p>
+        <p>Click the cover to open the full PDF.</p>
+        <div class="disclaimer">"Coastal Table Bistro & Bar" is a fictional restaurant created to demonstrate the Food Factor methodology. All names, numbers, and findings are illustrative — but the format and depth are exactly what you'd receive.</div>
+        <a href="/sample.pdf" target="_blank" class="cta-secondary">
+          Read the Full Sample (PDF)
           <svg width="16" height="12" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
         </a>
       </div>
@@ -1229,11 +1639,10 @@
   </div>
 </section>
 
-<!-- ═══ PROCESS ═══ -->
-<section class="process">
+<section class="process" id="process">
   <div class="container">
     <div class="reveal">
-      <div class="section-num">04 — The Process</div>
+      <div class="section-num">06 — The Process</div>
       <h2 class="section-title">Four steps. Seven days. <em>Zero IT lift.</em></h2>
     </div>
 
@@ -1246,28 +1655,27 @@
       <div class="step reveal">
         <div class="step-num">ii.</div>
         <h3>I do the work</h3>
-        <p>Your data runs through the same pipelines I built for restaurant operations analysis — POS, labor, and review NLP. I'm looking for the three findings that move real money.</p>
+        <p>Your data runs through the same pipelines I built for restaurant operations analysis — POS, labor, review NLP, delivery economics, and reservations. I'm looking for the three findings that move real money.</p>
       </div>
       <div class="step reveal">
         <div class="step-num">iii.</div>
         <h3>I show up</h3>
-        <p>60-minute working session at your restaurant, between services. You, me, the report on a screen, your team in the room.</p>
+        <p>60-minute working session at your restaurant, between services. You, me, the report on a screen, your team in the room. We go through every finding line by line.</p>
       </div>
       <div class="step reveal">
         <div class="step-num">iv.</div>
         <h3>You decide what to do</h3>
-        <p>You leave with a one-page action list and the full PDF. What you do with it is up to you.</p>
+        <p>You leave with a one-page action list and the full 18-page PDF. What you do with it is up to you. No retainer pitch unless you ask for one.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ COHORT ═══ -->
 <section class="cohort">
   <div class="container">
     <div class="cohort-grid">
       <div class="cohort-content reveal">
-        <div class="section-num">05 — The Offer</div>
+        <div class="section-num">07 — The Offer</div>
         <h2>Why this is <em>free</em> right now.</h2>
         <p>Food Factor is new. I'm building a Vancouver client base from zero, and the fastest way to do that isn't a louder pitch — it's letting three operators see the work and judge it themselves.</p>
         <p>So I'm giving the first three audits away in exchange for three things: honest feedback, permission to use your audit as an anonymized case study, and one introduction to another operator if the work earns it.</p>
@@ -1284,18 +1692,17 @@
         </ul>
         <div class="spots">
           <div class="spots-num">03</div>
-          <div class="spots-label">SPOTS<br/>REMAINING</div>
+          <div class="spots-label">Spots<br/>Remaining</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FIT / NOT FIT ═══ -->
 <section class="fit">
   <div class="container">
     <div class="reveal">
-      <div class="section-num">06 — The Fit</div>
+      <div class="section-num">08 — The Fit</div>
       <h2 class="section-title">Be honest with yourself <em>before you book.</em></h2>
     </div>
 
@@ -1324,13 +1731,12 @@
   </div>
 </section>
 
-<!-- ═══ ABOUT ═══ -->
 <section class="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-portrait reveal"></div>
       <div class="about-content reveal delay-1">
-        <div class="section-num">07 — The Person</div>
+        <div class="section-num">09 — The Person</div>
         <h2>Who you'd <em>actually</em> be working with.</h2>
         <p>I'm Tushar Pingle. I built Food Factor because Vancouver's restaurants deserve the same kind of operational intelligence that big chains pay six figures for — delivered by a person who understands the numbers and the room.</p>
         <p>My background is in data engineering and analytics: building pipelines, modeling operations, finding the signal in messy data. I'm not a restaurant consultant who learned spreadsheets. I'm a data person who fell in love with how restaurants actually work, and I built the tooling to prove it.</p>
@@ -1341,11 +1747,10 @@
   </div>
 </section>
 
-<!-- ═══ FAQ ═══ -->
 <section class="faq">
   <div class="container-narrow">
     <div class="reveal">
-      <div class="section-num">08 — The Questions</div>
+      <div class="section-num">10 — The Questions</div>
       <h2 class="section-title">Questions you're <em>probably</em> asking.</h2>
     </div>
 
@@ -1378,7 +1783,6 @@
   </div>
 </section>
 
-<!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta" id="cta">
   <div class="container">
     <div class="reveal">
@@ -1395,7 +1799,6 @@
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="container">
     <div class="logo">Food <span style="color: var(--gold);">Factor</span></div>
@@ -1404,74 +1807,69 @@
   </div>
 </footer>
 
-<!-- ═══ MOBILE STICKY BAR ═══ -->
 <div class="sticky-bar">
   <span>3 founding spots — free</span>
   <a href="#" onclick="openModal(event)">Claim →</a>
 </div>
 
-<!-- ═══ MODAL ═══ -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <button class="close" onclick="closeModal()">×</button>
     <h2>Tell me about your <em>restaurant.</em></h2>
-    <p class="modal-sub">Five fields. Then a 20-minute call to confirm fit.</p>
+    <p class="modal-sub">Five fields. Then a 30-minute call to confirm fit.</p>
 
-    <!-- TALLY EMBED PLACEHOLDER -->
-    <div id="tally-form-container">
-      <form id="leadForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label>Your name</label>
-          <input type="text" name="name" required />
-        </div>
-        <div class="form-group">
-          <label>Restaurant name</label>
-          <input type="text" name="restaurant" required />
-        </div>
-        <div class="form-group">
-          <label>Your role</label>
-          <select name="role" required>
-            <option value="">Select one…</option>
-            <option>Owner</option>
-            <option>GM / General Manager</option>
-            <option>Chef</option>
-            <option>Operations</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label>Which POS do you use?</label>
-          <select name="pos" required>
-            <option value="">Select one…</option>
-            <option>Square</option>
-            <option>TouchBistro</option>
-            <option>Lightspeed</option>
-            <option>Other</option>
-            <option>Not sure</option>
-          </select>
-        </div>
-        <button type="submit" class="cta-primary">
-          Continue to Booking
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
-        </button>
-      </form>
-    </div>
+    <form id="leadForm" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your name</label>
+        <input type="text" name="name" required />
+      </div>
+      <div class="form-group">
+        <label>Restaurant name</label>
+        <input type="text" name="restaurant" required />
+      </div>
+      <div class="form-group">
+        <label>Your role</label>
+        <select name="role" required>
+          <option value="">Select one…</option>
+          <option>Owner</option>
+          <option>GM / General Manager</option>
+          <option>Chef</option>
+          <option>Operations</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label>Which POS do you use?</label>
+        <select name="pos" required>
+          <option value="">Select one…</option>
+          <option>Square</option>
+          <option>TouchBistro</option>
+          <option>Lightspeed</option>
+          <option>Other</option>
+          <option>Not sure</option>
+        </select>
+      </div>
+      <button type="submit" class="cta-primary">
+        Continue to Booking
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </button>
+    </form>
   </div>
 </div>
 
 <script>
-  // ── Nav scroll ──
+  const CALENDLY_URL = "https://calendly.com/tush-pingle/30min";
+
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });
 
-  // ── Reveal on scroll ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) e.target.classList.add('in');
@@ -1480,7 +1878,6 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Modal ──
   function openModal(e) {
     if (e) e.preventDefault();
     document.getElementById('modal').classList.add('open');
@@ -1494,20 +1891,18 @@
     if (e.target.id === 'modal') closeModal();
   });
 
-  // ── Form submit (placeholder — replace with Tally embed) ──
-  // CALENDLY URL — REPLACE THIS WITH YOUR REAL CALENDLY LINK
-  const CALENDLY_URL = "https://calendly.com/tush-pingle/30min";
-
   function handleSubmit(e) {
     e.preventDefault();
-    // In production: replace this whole form with a Tally embed.
-    // Tally → New form → Embed → paste their <script> tag in place of this <form>.
-    // Tally has a built-in "redirect on submit" → set it to your Calendly URL.
-    alert("Form submitted! In production, this redirects to Calendly.\n\nNext steps:\n1. Replace this form with a Tally embed\n2. Set Tally redirect URL to your Calendly link\n3. Update CALENDLY_URL in this script");
-    window.location.href = CALENDLY_URL;
+    const formData = new FormData(e.target);
+    const params = new URLSearchParams();
+    params.set('name', formData.get('name'));
+    params.set('email', formData.get('email'));
+    params.set('a1', formData.get('restaurant'));
+    params.set('a2', formData.get('role'));
+    params.set('a3', formData.get('pos'));
+    window.location.href = CALENDLY_URL + '?' + params.toString();
   }
 
-  // ── ESC closes modal ──
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
